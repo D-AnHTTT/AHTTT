@@ -1,3 +1,4 @@
+
 package com.laptrinhjavaweb.entity;
 
 import java.util.ArrayList;
@@ -9,8 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Entity
 public class User {
@@ -78,11 +79,12 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-//	@Transient
-//	  public List<GrantedAuthority> getAuthorities() {
-//	    List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-//	      authorities.add(new SimpleGrantedAuthority(this.getRole()));
-//	    return authorities;
-//	  }
+
+	@Transient
+	public List<GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority(this.getRole()));
+		return authorities;
+	}
 
 }
