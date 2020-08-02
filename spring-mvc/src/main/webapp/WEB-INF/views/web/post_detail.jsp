@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,14 +14,18 @@
 		<div class="row">
 
 			<!-- Post Content Column -->
-			<div class="col-lg-8">
+			<div class="col-lg-12">
 
 				<!-- Title -->
-				<h1 class="mt-4">Post Title</h1>
+				<h1 class="mt-4">${postDetail.getTitle() }</h1>
 
 				<!-- Author -->
 				<p class="lead">
 					by <a href="#">Start Bootstrap</a>
+				</p>
+
+				<p class="lead">
+					<span>in category</span> <span class="text-primary">${categoryPostName }</span>
 				</p>
 
 				<hr>
@@ -31,13 +36,17 @@
 				<hr>
 
 				<!-- Preview Image -->
-				<img class="img-fluid rounded" src="http://placehold.it/900x300"
-					alt="">
+				<img src="<c:url value='/file/${postDetail.getImgThumbnail() }'/>"
+					class="img-thumbnail" alt="Hinh anh thumbnail cua post" width="900"
+					height="300">
+				<!-- <img class="img-fluid rounded" src="http://placehold.it/900x300"
+					alt=""> -->
 
 				<hr>
 
 				<!-- Post Content -->
-				<p class="lead">Lorem ipsum dolor sit amet, consectetur
+				<p>${postDetail.getContent() }</p>
+				<!-- <p class="lead">Lorem ipsum dolor sit amet, consectetur
 					adipisicing elit. Ducimus, vero, obcaecati, aut, error quam
 					sapiente nemo saepe quibusdam sit excepturi nam quia corporis
 					eligendi eos magni recusandae laborum minus inventore?</p>
@@ -68,10 +77,90 @@
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 					Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione
 					tempore quidem voluptates cupiditate voluptas illo saepe quaerat
-					numquam recusandae? Qui, necessitatibus, est!</p>
+					numquam recusandae? Qui, necessitatibus, est!</p> -->
 
 				<hr>
+				<!--/.Carousel Wrapper-->
+				<div id="carousel-example-2"
+					class="carousel slide carousel-fade z-depth-1-half"
+					data-ride="carousel">
+					<!--Indicators-->
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example-2" data-slide-to="0"
+							class="active"></li>
+						<c:forEach var='count' begin='1' end='${listImgPost.size()-1 }'>
+							<li data-target="#carousel-example-2" data-slide-to="${count }"></li>
+						</c:forEach>
+						<!-- <li data-target="#carousel-example-2" data-slide-to="0"
+							class="active"></li>
+						<li data-target="#carousel-example-2" data-slide-to="1"></li> -->
+						<!-- <li data-target="#carousel-example-2" data-slide-to="2"></li> -->
+					</ol>
+					<!--/.Indicators-->
+					<!--Slides-->
+					<div class="carousel-inner" role="listbox">
+						<div class="carousel-item active">
+							<div class="view">
+								<img src="<c:url value='/file/${listImgPost.get(0) }'/>"
+									class="img-thumbnail" alt="Hinh anh thumbnail cua post"
+									width="900" height="300">
+								<!-- <img class="d-block w-100"
+									src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg"
+									alt="First slide"> -->
+								<div class="mask rgba-black-light"></div>
+							</div>
+							<div class="carousel-caption">
+								<!-- <h3 class="h3-responsive">This is the first title</h3>
+						<p>First text</p> -->
+							</div>
+						</div>
+						<c:forEach var='img' begin='1' end='${listImgPost.size()-1 }'>
 
+							<div class="carousel-item">
+								<!--Mask color-->
+								<div class="view">
+									<img src="<c:url value='/file/${listImgPost.get(img) }'/>"
+										class="img-thumbnail" alt="Hinh anh thumbnail cua post"
+										width="900" height="300">
+									<!-- <img class="d-block w-100"
+									src="https://mdbootstrap.com/img/Photos/Slides/img%20(115).jpg"
+									alt="Second slide"> -->
+									<div class="mask rgba-black-light"></div>
+								</div>
+								<div class="carousel-caption">
+									<!-- <h3 class="h3-responsive">Thir is the second title</h3>
+						<p>Secondary text</p> -->
+								</div>
+							</div>
+						</c:forEach>
+						<!-- <div class="carousel-item">
+							Mask color
+							<div class="view">
+								<img class="d-block w-100"
+									src="https://mdbootstrap.com/img/Photos/Slides/img%20(108).jpg"
+									alt="Third slide">
+								<div class="mask rgba-black-light"></div>
+							</div>
+							<div class="carousel-caption">
+						<h3 class="h3-responsive">This is the third title</h3>
+						<p>Third text</p>
+					</div>
+						</div> -->
+					</div>
+					<!--/.Slides-->
+					<!--Controls-->
+					<a class="carousel-control-prev" href="#carousel-example-2"
+						role="button" data-slide="prev"> <span
+						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+						class="sr-only">Previous</span>
+					</a> <a class="carousel-control-next" href="#carousel-example-2"
+						role="button" data-slide="next"> <span
+						class="carousel-control-next-icon" aria-hidden="true"></span> <span
+						class="sr-only">Next</span>
+					</a>
+					<!--/.Controls-->
+				</div>
+				<!--/.Carousel Wrapper-->
 				<!-- Comments Form -->
 				<div class="card my-4">
 					<h5 class="card-header">Leave a Comment:</h5>
@@ -140,128 +229,12 @@
 
 			</div>
 
-			<!-- Sidebar Widgets Column -->
-			<div class="col-md-4">
-
-				<!-- Search Widget -->
-				<div class="card my-4">
-					<h5 class="card-header">Search</h5>
-					<div class="card-body">
-						<div class="input-group">
-							<input type="text" class="form-control"
-								placeholder="Search for..."> <span
-								class="input-group-append">
-								<button class="btn btn-secondary" type="button">Go!</button>
-							</span>
-						</div>
-					</div>
-				</div>
-
-				<!-- Categories Widget -->
-				<div class="card my-4">
-					<h5 class="card-header">Categories</h5>
-					<div class="card-body">
-						<div class="row">
-							<div class="col-lg-6">
-								<ul class="list-unstyled mb-0">
-									<li><a href="#">Web Design</a></li>
-									<li><a href="#">HTML</a></li>
-									<li><a href="#">Freebies</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-6">
-								<ul class="list-unstyled mb-0">
-									<li><a href="#">JavaScript</a></li>
-									<li><a href="#">CSS</a></li>
-									<li><a href="#">Tutorials</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Side Widget -->
-				<div class="card my-4">
-					<h5 class="card-header">Side Widget</h5>
-					<div class="card-body">You can put anything you want inside
-						of these side widgets. They are easy to use, and feature the new
-						Bootstrap 4 card containers!</div>
-				</div>
-
-			</div>
 
 		</div>
 		<!-- /.row -->
 
 		<!-- /.container -->
-		<h1>Hello post detail</h1>
-		<!--/.Carousel Wrapper-->
-		<div id="carousel-example-2"
-			class="carousel slide carousel-fade z-depth-1-half"
-			data-ride="carousel">
-			<!--Indicators-->
-			<ol class="carousel-indicators">
-				<li data-target="#carousel-example-2" data-slide-to="0"
-					class="active"></li>
-				<li data-target="#carousel-example-2" data-slide-to="1"></li>
-				<li data-target="#carousel-example-2" data-slide-to="2"></li>
-			</ol>
-			<!--/.Indicators-->
-			<!--Slides-->
-			<div class="carousel-inner" role="listbox">
-				<div class="carousel-item active">
-					<div class="view">
-						<img class="d-block w-100"
-							src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg"
-							alt="First slide">
-						<div class="mask rgba-black-light"></div>
-					</div>
-					<div class="carousel-caption">
-						<!-- <h3 class="h3-responsive">This is the first title</h3>
-						<p>First text</p> -->
-					</div>
-				</div>
-				<div class="carousel-item">
-					<!--Mask color-->
-					<div class="view">
-						<img class="d-block w-100"
-							src="https://mdbootstrap.com/img/Photos/Slides/img%20(115).jpg"
-							alt="Second slide">
-						<div class="mask rgba-black-light"></div>
-					</div>
-					<div class="carousel-caption">
-						<!-- <h3 class="h3-responsive">Thir is the second title</h3>
-						<p>Secondary text</p> -->
-					</div>
-				</div>
-				<div class="carousel-item">
-					<!--Mask color-->
-					<div class="view">
-						<img class="d-block w-100"
-							src="https://mdbootstrap.com/img/Photos/Slides/img%20(108).jpg"
-							alt="Third slide">
-						<div class="mask rgba-black-light"></div>
-					</div>
-					<!-- <div class="carousel-caption">
-						<h3 class="h3-responsive">This is the third title</h3>
-						<p>Third text</p>
-					</div> -->
-				</div>
-			</div>
-			<!--/.Slides-->
-			<!--Controls-->
-			<a class="carousel-control-prev" href="#carousel-example-2"
-				role="button" data-slide="prev"> <span
-				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-				class="sr-only">Previous</span>
-			</a> <a class="carousel-control-next" href="#carousel-example-2"
-				role="button" data-slide="next"> <span
-				class="carousel-control-next-icon" aria-hidden="true"></span> <span
-				class="sr-only">Next</span>
-			</a>
-			<!--/.Controls-->
-		</div>
-		<!--/.Carousel Wrapper-->
+
 	</div>
 </body>
 </html>

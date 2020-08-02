@@ -8,11 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<input type='hidden' name='username' value='${sessionScope.username }'>
+	<input type='hidden' name='password' value='${sessionScope.password }'>
 	<div class="container">
 		<h1 class='display-3'>New Feed</h1>
 		<!-- Trigger the modal with a button -->
-		<button type="button" class="btn btn-primary btn-lg"
-			data-toggle="modal" data-target="#myModal">Tạo bài viết</button>
+		<button onclick='checkLogin()' type="button"
+			class="btn btn-primary btn-lg" data-toggle="modal"
+			data-target="#myModal">Tạo bài viết</button>
 
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" role="dialog">
@@ -83,14 +86,18 @@
 						</div>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn btn-info">Đăng</button>
-							<button type="button" class="btn btn btn-danger"
-								data-dismiss="modal">Close</button>
+							<button type="button" id='closeNewPost'
+								class="btn btn btn-danger" data-dismiss="modal">Close</button>
 						</div>
 					</form>
 				</div>
 
 			</div>
 		</div>
+		<%-- <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-12">
 		<c:if test="${not empty listPost}">
 			<c:forEach var='item' items='${listPost }'>
 				<div class="row align-items-center my-5">
@@ -115,7 +122,56 @@
 			</c:forEach>
 		</c:if>
 		<!-- Page Content -->
+		</div>
+		</div> --%>
 
+		<div class="row" style='padding-top:20px'>
+
+			<!-- Blog Entries Column -->
+			<div class="col-md-12">
+
+				<!-- <h1 class="my-4">
+					Page Heading <small>Secondary Text</small>
+				</h1> -->
+				<c:if test="${not empty listPost}">
+					<c:forEach var='item' items='${listPost }'>
+						<!-- Blog Post -->
+						<div class="card mb-4">
+							<img src="<c:url value='/file/${item.getImgThumbnail() }'/>"
+								class="img-thumbnail" alt="Hinh anh thumbnail cua post"
+								width=100% height=30%>
+							<div class="card-body">
+								<h2 class="card-title">${item.getTitle()}</h2>
+								<p class="card-text">${item.getShortDecription() }</p>
+								<c:url var='postUrl' value='/trang-chu/showPostDetail'>
+									<c:param name="id" value='${item.getId() }' />
+								</c:url>
+								<a href="${ postUrl}" class="btn btn-primary">Read More
+									&rarr;</a>
+							</div>
+							<div class="card-footer text-muted">
+								Posted on January 1, 2020 by <a href="#">Start Bootstrap</a>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
+
+				<!-- Pagination -->
+				<ul class="pagination justify-content-center mb-4">
+					<li class="page-item "><a class="page-link" href='<c:url value="/trang-chu/nextPage"></c:url>'>&larr;
+							Older</a></li>
+					<li class="page-item "><a class="page-link" href='<c:url value="/trang-chu/previousPage"></c:url>'>Newer
+							&rarr;</a></li>
+				</ul>
+
+			</div>
+
+			<!-- Sidebar Widgets Column -->
+
+		</div>
+		<!-- /.row -->
+
+		<!-- /.container -->
 		<!-- Heading Row -->
 		<!-- <div class="row align-items-center my-5">
 			<div class="col-lg-7">
