@@ -39,7 +39,7 @@ public class NewFeedController {
 	public String showNewFeed(Model model, HttpSession session) {
 		List<Category> listCategory = categoryService.findAll();
 		model.addAttribute("listCategory", listCategory);
-		Page<Post_X> listPost = postService.findAll(pageable);
+		Page<Post_X> listPost = postService.findAllByOrderByIdDesc(pageable);
 		model.addAttribute("listPost", listPost.getContent());
 		String username = (String) session.getAttribute("username");
 		String password = (String) session.getAttribute("password");
@@ -53,7 +53,7 @@ public class NewFeedController {
 	public String addNewFeed(@RequestParam("title")String title,@RequestParam("shortDecription")String shortDecription,@RequestParam("content")String content,
 							 @RequestParam("address")String address,@RequestParam("city")String city,
 							 @RequestParam("state")String state,@RequestParam("fileThumbnail")MultipartFile fileThumbnail,
-							 @RequestParam("reviewType")String reviewType,@RequestParam("fileInput")MultipartFile[] fileInput) {
+							 @RequestParam("reviewType")String reviewType,@RequestParam(value = "fileInput", required = false)MultipartFile[] fileInput) {
 		try {
 			String day = "" + LocalDate.now();
 			String fileThumbnailUrl = fileThumbnail.getOriginalFilename();
@@ -62,11 +62,13 @@ public class NewFeedController {
 			StringBuffer sb = new StringBuffer();
 			for(int i=0;i<fileInput.length;i++) {
 				String fileUrl = fileInput[i].getOriginalFilename();
-				File saveFile = new File("/Users/anhnguyen/desktop/Tmp/" + fileUrl);
-				fileInput[i].transferTo(saveFile);
-				sb.append(fileUrl);
-				if(i!=fileInput.length-1)
-					sb.append("&&");
+				if(!fileUrl.equals("")) {
+					File saveFile = new File("/Users/anhnguyen/desktop/Tmp/" + fileUrl);
+					fileInput[i].transferTo(saveFile);
+					sb.append(fileUrl);
+					if(i!=fileInput.length-1)
+						sb.append("&&");
+				}
 			}
 			Post_X post = new Post_X();
 			post.setTitle(title);
@@ -98,13 +100,15 @@ public class NewFeedController {
 	}
 	@RequestMapping(value = "/trang-chu/nextPage", method = RequestMethod.GET)
 	public String nextPage(Model model) {
-		Page<Post_X> listPost = postService.findAll(pageable.next());
+		pageable = pageable.next();
+		Page<Post_X> listPost = postService.findAllByOrderByIdDesc(pageable);
 		model.addAttribute("listPost", listPost.getContent());
 		return "web/new_feed";
 	}
 	@RequestMapping(value = "/trang-chu/previousPage", method = RequestMethod.GET)
 	public String previousPage(Model model) {
-		Page<Post_X> listPost = postService.findAll(pageable.previousOrFirst());
+		pageable = pageable.previousOrFirst();
+		Page<Post_X> listPost = postService.findAllByOrderByIdDesc(pageable);
 		model.addAttribute("listPost", listPost.getContent());
 		return "web/new_feed";
 	}

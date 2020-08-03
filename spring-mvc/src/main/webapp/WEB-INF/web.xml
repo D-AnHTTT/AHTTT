@@ -25,8 +25,10 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
             /WEB-INF/context/applicationContext.xml
+            /WEB-INF/context/spring-security.xml
         </param-value>
 	</context-param>
+	
 	<!-- encoding filter -->
 	<filter>
 	    <filter-name>EncodingFilter</filter-name>

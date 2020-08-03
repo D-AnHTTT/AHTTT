@@ -31,4 +31,7 @@ public class Post_XService {
 	public List<Post_X> findPostByLimit(int lmt) {
 		return postRepo.findPostByLimit(lmt);
 	}
+	public Page<Post_X> findAllByOrderByIdDesc(Pageable pageable){
+		return postRepo.findAllByOrderByIdDesc(pageable);
+	}
 }

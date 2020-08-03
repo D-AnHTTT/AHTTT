@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
 	<input type='hidden' name='username' value='${sessionScope.username }'>
@@ -75,7 +74,7 @@
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputState">Loại review</label> <select
-										name='reviewType' id="inputState" class="form-control">
+										name='reviewType' id="inputState" class="form-control" required="required">
 										<option selected>Choose...</option>
 										<c:forEach var='item' items='${listCategory }'>
 											<option>${item.getName()}</option>
@@ -190,7 +189,7 @@
 			/.col-md-4
 		</div> -->
 		<!-- /.row -->
-		Call to Action Well
+		<!-- Call to Action Well -->
 		<div class="card text-white bg-secondary my-5 py-4 text-center">
 			<div class="card-body">
 				<p class="text-white m-0">This call to action card is a great
@@ -204,10 +203,8 @@
 			<div class="col-md-4 mb-5">
 				<div class="card h-100">
 					<div class="card-body">
-						<h2 class="card-title">Card One</h2>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Rem magni quas ex numquam, maxime minus quam
-							molestias corporis quod, ea minima accusamus.</p>
+						<h2 class="card-title">Anh Nguyen</h2>
+						<p class="card-text">Rất đẹp trai, tài lăng có tố chất lãnh đạo thường xuyên review địa danh </p>
 					</div>
 					<div class="card-footer">
 						<a href="#" class="btn btn-primary btn-sm">More Info</a>
@@ -218,7 +215,7 @@
 			<div class="col-md-4 mb-5">
 				<div class="card h-100">
 					<div class="card-body">
-						<h2 class="card-title">Card Two</h2>
+						<h2 class="card-title">Khoi Nguyen</h2>
 						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
 							adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt
 							pariatur voluptatem sunt quam eaque, vel, non in id dolore
@@ -233,7 +230,7 @@
 			<div class="col-md-4 mb-5">
 				<div class="card h-100">
 					<div class="card-body">
-						<h2 class="card-title">Card Three</h2>
+						<h2 class="card-title">Thong Nguyen</h2>
 						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
 							adipisicing elit. Rem magni quas ex numquam, maxime minus quam
 							molestias corporis quod, ea minima accusamus.</p>
@@ -244,7 +241,15 @@
 				</div>
 			</div>
 			<!-- /.col-md-4 -->
-
+			<div class="col-md-12 mb-5">
+			<!-- Pagination -->
+				<ul class="pagination justify-content-center mb-4">
+					<li class="page-item "><a class="page-link" href='#'>&larr;
+							Older</a></li>
+					<li class="page-item "><a class="page-link" href='#'>Newer
+							&rarr;</a></li>
+				</ul>
+				</div>
 		</div>
 		<!-- /.row -->
 

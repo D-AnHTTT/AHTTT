@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface Post_XRepository extends JpaRepository<Post_X, Long> {
 	Page<Post_X> findAll(Pageable ageable );
+	Page<Post_X> findAllByOrderByIdDesc(Pageable ageable );
 	Post_X findById(long id);
 
 	@Query(value = "SELECT * FROM Post_X u limit :lmt", nativeQuery = true)
