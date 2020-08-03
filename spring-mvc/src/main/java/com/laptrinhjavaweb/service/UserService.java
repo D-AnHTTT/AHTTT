@@ -35,6 +35,10 @@ public class UserService {
 	public User findId(long id) {
 		return UserRP.findOne(id);
 	}
+	public User findByUsernameAndPassword(String username,String password) {
+		return UserRP.findByUsernameAndPassword(username, password);
+	}
+	
 
 	public void delete(long id) {
 		UserRP.delete(id);
