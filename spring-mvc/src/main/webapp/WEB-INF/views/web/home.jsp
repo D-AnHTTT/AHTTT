@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ include file="/common/taglib.jsp" %>
 <!DOCTYPE html>
 
 <html>
@@ -12,17 +13,17 @@
 </head>
 
 <body>
-
+	<c:redirect url='/trang-chu/newFeed'/>
 	<!-- Page Content -->
-	<div class="container">
+	<!-- <div class="container">
 
-		<!-- Heading Row -->
+		Heading Row
 		<div class="row align-items-center my-5">
 			<div class="col-lg-7">
 				<img class="img-fluid rounded mb-4 mb-lg-0"
 					src="http://placehold.it/900x400" alt="">
 			</div>
-			<!-- /.col-lg-8 -->
+			/.col-lg-8
 			<div class="col-lg-5">
 				<h1 class="font-weight-light">Business Name or Tagline</h1>
 				<p>This is a template that is great for small businesses. It
@@ -31,11 +32,11 @@
 					template for any project you want!</p>
 				<a class="btn btn-primary" href="#">Call to Action!</a>
 			</div>
-			<!-- /.col-md-4 -->
+			/.col-md-4
 		</div>
-		<!-- /.row -->
+		/.row
 
-		<!-- Call to Action Well -->
+		Call to Action Well
 		<div class="card text-white bg-secondary my-5 py-4 text-center">
 			<div class="card-body">
 				<p class="text-white m-0">This call to action card is a great
@@ -44,7 +45,7 @@
 			</div>
 		</div>
 
-		<!-- Content Row -->
+		Content Row
 		<div class="row">
 			<div class="col-md-4 mb-5">
 				<div class="card h-100">
@@ -59,7 +60,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- /.col-md-4 -->
+			/.col-md-4
 			<div class="col-md-4 mb-5">
 				<div class="card h-100">
 					<div class="card-body">
@@ -74,7 +75,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- /.col-md-4 -->
+			/.col-md-4
 			<div class="col-md-4 mb-5">
 				<div class="card h-100">
 					<div class="card-body">
@@ -88,12 +89,12 @@
 					</div>
 				</div>
 			</div>
-			<!-- /.col-md-4 -->
+			/.col-md-4
 
 		</div>
-		<!-- /.row -->
+		/.row
 
-	</div>
+	</div> -->
 	<!-- /.container -->
 
 </body>

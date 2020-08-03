@@ -39,18 +39,14 @@ public class PostController {
 		return "admin/admin_addeditPost";
 	}
 
-	@RequestMapping(value = "admin/savepost", method = RequestMethod.POST)
+	@RequestMapping("admin/savepost")
 	public String savePost(@RequestParam("fileimg") MultipartFile fileimg, @RequestParam("content") String content,
 			@RequestParam("title") String title, @RequestParam("category") int category,
-			@RequestParam("userid") long userid, @RequestParam("username") String username,
-			@RequestParam("timepost") String timepost) {
+			@RequestParam("username") String username, @RequestParam("timepost") String timepost) {
+		long userid = postSV.getUser(username).getId();
 		try {
 			String fileName = fileimg.getOriginalFilename();
-			String path = this.getClass().getClassLoader().getResource("").getPath();
-			String fullPath = URLDecoder.decode(path, "UTF-8");
-			String pathArr[] = fullPath.split(".metadata");
-			String folder = pathArr[0].substring(1)+"/AHTT/spring-mvc/src/main/java/com/laptrinhjavaweb/img/";
-			File file = new File("C:\\Users\\anguyen206\\Desktop\\HCMUAF\\CDW\\doAn\\AHTTT\\spring-mvc\\src\\main\\java\\com\\laptrinhjavaweb\\img", fileName);
+			File file = new File("D:\\abc\\", fileName);
 			fileimg.transferTo(file);
 			Post post = new Post(title, content, timepost, userid, username, category, fileName);
 			postSV.savePost(post);

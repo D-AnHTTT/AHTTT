@@ -59,15 +59,15 @@ public class JPAConfig {
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver multipartResolver() {
 	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-	    multipartResolver.setMaxUploadSize(100000);
+	    multipartResolver.setMaxUploadSize(50000000);
 	    return multipartResolver;
 	}
 	
 	Properties additionalProperties() {
 		Properties properties = new Properties();
-//		properties.setProperty("hibernate.hbm2ddl.auto", "create");
+		properties.setProperty("hibernate.hbm2ddl.auto", "create");
 //		properties.setProperty("hibernate.hbm2ddl.auto", "update");
-		properties.setProperty("hibernate.hbm2ddl.auto", "none");
+//		properties.setProperty("hibernate.hbm2ddl.auto", "none");
 		return properties;
 	}
 }

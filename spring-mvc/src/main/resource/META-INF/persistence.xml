@@ -5,6 +5,7 @@
         <class>com.laptrinhjavaweb.entity.Category</class>
         <class>com.laptrinhjavaweb.entity.Comment</class>
         <class>com.laptrinhjavaweb.entity.Post</class>
+        <class>com.laptrinhjavaweb.entity.Post_X</class>
         <class>com.laptrinhjavaweb.entity.Rate</class>
         <class>com.laptrinhjavaweb.entity.User</class>
     </persistence-unit>

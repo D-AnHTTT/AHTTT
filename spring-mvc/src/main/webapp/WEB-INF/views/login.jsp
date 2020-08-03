@@ -6,7 +6,7 @@
 <body>
   <h1>Spring MVC 5 - Spring Security 5 - Hibernate 5</h1>
   <h2>${message}</h2>
-  <form name='loginForm' action="<c:url value='j_spring_security_login' />" method='POST'>
+  <form name='loginForm' action='j_spring_security_login' method='POST'>
     <table>
       <tr>
         <td>User:</td>

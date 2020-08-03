@@ -9,5 +9,9 @@
     <decorator name="home" page="admin.jsp">
        <pattern>/admin*</pattern>
     </decorator>
+    
+    <decorator name="login" page="login.jsp">
+       <pattern>/trang-chu/login</pattern>
+    </decorator>
 
 </decorators>

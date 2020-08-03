@@ -24,4 +24,7 @@ public class CategoryService {
 	public Category findId(long id) {
 		return categoryRP.findOne(id);
 	}
+	public Category findByName(String name) {
+		return categoryRP.findByName(name);
+	}
 }
