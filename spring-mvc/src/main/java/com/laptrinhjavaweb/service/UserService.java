@@ -22,9 +22,6 @@ public class UserService {
 
 	public boolean saveUser(User user) {
 		String password = user.getPassword();
-		SCryptPasswordEncoder pass = new SCryptPasswordEncoder();
-		// BCryptPasswordEncoder pass = new BCryptPasswordEncoder();
-		user.setPassword(pass.encode(password));
 		return UserRP.save(user) != null;
 	}
 

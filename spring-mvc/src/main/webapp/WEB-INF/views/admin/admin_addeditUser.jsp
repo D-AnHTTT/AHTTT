@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<base href="${pageContext.servletContext.contextPath}/">
 <style>
 .user input, button {
 	width: 100%;
@@ -25,7 +26,7 @@
 					</c:if>
 				</div>
 				<table class="usertable">
-					<form:form action="admin/saveUser" method="POST"
+					<form:form action="admin/saveUser" method="post"
 						modelAttribute="user">
 						<c:if test="${not empty user.getId()}">
 							<form:hidden path="id" />

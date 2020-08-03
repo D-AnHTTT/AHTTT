@@ -14,7 +14,6 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String title;
-	@Type(type="text")
 	private String content;
 	private String time_post;
 	private long user_id;

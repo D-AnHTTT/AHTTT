@@ -46,7 +46,7 @@ public class PostController {
 		long userid = postSV.getUser(username).getId();
 		try {
 			String fileName = fileimg.getOriginalFilename();
-			File file = new File("D:\\abc\\", fileName);
+			File file = new File("D:\\xaolon\\", fileName);
 			fileimg.transferTo(file);
 			Post post = new Post(title, content, timepost, userid, username, category, fileName);
 			postSV.savePost(post);
