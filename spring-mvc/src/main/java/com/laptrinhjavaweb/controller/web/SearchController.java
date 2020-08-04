@@ -26,7 +26,7 @@ import com.laptrinhjavaweb.service.Post_XService;
 public class SearchController {
 	@Autowired
 	Post_XService post_xService;
-	Pageable pageable = new PageRequest(0, 1);
+	Pageable pageable = new PageRequest(0, 2);
 	String search = "";
 	@RequestMapping(value = "ajax")
 	public void search(HttpServletRequest request, HttpServletResponse response) throws IOException {
