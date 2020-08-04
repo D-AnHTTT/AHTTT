@@ -25,4 +25,5 @@ public interface Post_XRepository extends JpaRepository<Post_X, Long> {
 //	select * from springmvcbasic.Post_X p where p.title like '%good%'
 	@Query(value = "select p from Post_X p where p.title like %:title%")
 	List<Post_X> findPostByTitle(@Param("title") String title);
+	Page<Post_X> findByTitleContaining(String title,Pageable ageable);
 }

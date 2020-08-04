@@ -43,7 +43,6 @@
 <body>
 	<%@ include file="/common/web/header.jsp"%>
 	<div style='padding-left: 100px; padding-right: 50px'>
-
 		<div class="row">
 			<!-- Navigation -->
 			<div class="col-lg-8">
@@ -56,13 +55,19 @@
 				<div class="card my-4">
 					<h5 class="card-header">Search</h5>
 					<div class="card-body">
-					<form action='<c:url value='/trang-chu/search?${_csrf.parameterName}=${_csrf.token}'></c:url>' method="post">
-						<div class="input-group">
-								<input type="text" name="search" id="search" class="form-control" /> 
+						<form
+							action='<c:url value='/trang-chu/search?${_csrf.parameterName}=${_csrf.token}'></c:url>'
+							method="post">
+							<div class="input-group">
+								<input
+									onkeyup="return searchPost('${pageContext.request.contextPath}')"
+									onfocus="return searchOnFocus('${pageContext.request.contextPath}')"
+									onblur="return searchOutFocus('${pageContext.request.contextPath}')"
+									type="text" name="search" id="search" class="form-control" />
 								<span class="input-group-append">
 									<button class="btn btn-secondary" type="submit">Go!</button>
 								</span>
-						</div>
+							</div>
 						</form>
 						<ul class="list-group" id="result"></ul>
 						<br />
@@ -117,45 +122,6 @@
 				$("#result").html('');
 			});
 		});
-	</script>
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$('#search')
-									.keyup(
-											function() {
-												$('#result').html('');
-												$
-														.ajax({
-															type : 'GET',
-															data : {
-																serch : $(
-																		'#search')
-																		.val()
-															},
-															contentType : 'application/json; charset=utf-8',
-															url : '${pageContext.request.contextPath }/ajax',
-															success : function(
-																	result) {
-																var products = $
-																		.parseJSON(result);
-																var size = products.length;
-																var s = "";
-																for (var i = 0; i < products.length; i++) {
-																	$('#result')
-																			.append(
-																					'<li class="list-group-item link-class">'
-																							+ products[i]
-																							+ ' | <span class="text-muted">'
-																							+ products[i]
-																							+ '</span></li>');
-																}
-
-															}
-														});
-											});
-						});
 	</script>
 	<!-- <script type="text/javascript">
 		$(document)

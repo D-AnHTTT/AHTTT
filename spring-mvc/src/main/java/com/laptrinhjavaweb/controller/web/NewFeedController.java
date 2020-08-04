@@ -41,6 +41,7 @@ public class NewFeedController {
 		model.addAttribute("listCategory", listCategory);
 		Page<Post_X> listPost = postService.findAllByOrderByIdDesc(pageable);
 		model.addAttribute("listPost", listPost.getContent());
+		model.addAttribute("screenName", "newfeed");
 		String username = (String) session.getAttribute("username");
 		String password = (String) session.getAttribute("password");
 		if (username == null && password == null) {
@@ -48,6 +49,15 @@ public class NewFeedController {
 			session.setAttribute("password", "");
 		}
 		return "web/new_feed";
+	}
+	public String replaceContentWithBr(String str) {
+		StringBuffer text = new StringBuffer(str);
+		int loc = (new String(text)).indexOf('\n');
+	    while(loc > 0){
+	        text.replace(loc, loc+1, "<BR>");
+	        loc = (new String(text)).indexOf('\n');
+	   }
+		return text.toString();
 	}
 	@RequestMapping(value = "/trang-chu/addPost", method = RequestMethod.POST)
 	public String addNewFeed(@RequestParam("title")String title,@RequestParam("shortDecription")String shortDecription,@RequestParam("content")String content,
@@ -72,7 +82,7 @@ public class NewFeedController {
 			}
 			Post_X post = new Post_X();
 			post.setTitle(title);
-			post.setContent(content);
+			post.setContent(replaceContentWithBr(content));
 			post.setAddress(address+", "+city+", "+state);
 			post.setTime_post(day);
 			post.setShortDecription(shortDecription);
@@ -98,17 +108,19 @@ public class NewFeedController {
 		model.addAttribute("listImgPost", postModel.getListImgPost());
 		return "web/post_detail";
 	}
-	@RequestMapping(value = "/trang-chu/nextPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/trang-chu/newfeed/nextPage", method = RequestMethod.GET)
 	public String nextPage(Model model) {
 		pageable = pageable.next();
 		Page<Post_X> listPost = postService.findAllByOrderByIdDesc(pageable);
+		model.addAttribute("screenName", "newfeed");
 		model.addAttribute("listPost", listPost.getContent());
 		return "web/new_feed";
 	}
-	@RequestMapping(value = "/trang-chu/previousPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/trang-chu/newfeed/previousPage", method = RequestMethod.GET)
 	public String previousPage(Model model) {
 		pageable = pageable.previousOrFirst();
 		Page<Post_X> listPost = postService.findAllByOrderByIdDesc(pageable);
+		model.addAttribute("screenName", "newfeed");
 		model.addAttribute("listPost", listPost.getContent());
 		return "web/new_feed";
 	}

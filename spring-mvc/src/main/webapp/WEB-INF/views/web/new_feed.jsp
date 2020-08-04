@@ -10,7 +10,14 @@
 	<input type='hidden' name='username' value='${sessionScope.username }'>
 	<input type='hidden' name='password' value='${sessionScope.password }'>
 	<div class="container">
-		<h1 class='display-3'>New Feed</h1>
+		<c:choose>
+			<c:when test='${screenName=="newfeed" }'>
+				<h1 class='display-3'>New Feed</h1>
+			</c:when>
+			<c:when test='${screenName=="searchPost" }'>
+				<h1 class='display-3'>Search Page</h1>
+			</c:when>
+		</c:choose>
 		<!-- Trigger the modal with a button -->
 		<button onclick='checkLogin()' type="button"
 			class="btn btn-primary btn-lg" data-toggle="modal"
@@ -21,7 +28,8 @@
 			<div class="modal-dialog">
 				<!-- Modal content-->
 				<div class="modal-content">
-					<form action='<c:url value="/trang-chu/addPost?${_csrf.parameterName}=${_csrf.token}"></c:url>'
+					<form
+						action='<c:url value="/trang-chu/addPost?${_csrf.parameterName}=${_csrf.token}"></c:url>'
 						enctype="multipart/form-data" method="post">
 						<div style="height: 0px; overflow: hidden">
 							<input type="file" id="fileInput" name="fileInput"
@@ -74,7 +82,8 @@
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputState">Loại review</label> <select
-										name='reviewType' id="inputState" class="form-control" required="required">
+										name='reviewType' id="inputState" class="form-control"
+										required="required">
 										<option selected>Choose...</option>
 										<c:forEach var='item' items='${listCategory }'>
 											<option>${item.getName()}</option>
@@ -124,7 +133,7 @@
 		</div>
 		</div> --%>
 
-		<div class="row" style='padding-top:20px'>
+		<div class="row" style='padding-top: 20px'>
 
 			<!-- Blog Entries Column -->
 			<div class="col-md-12">
@@ -157,9 +166,11 @@
 
 				<!-- Pagination -->
 				<ul class="pagination justify-content-center mb-4">
-					<li class="page-item "><a class="page-link" href='<c:url value="/trang-chu/nextPage"></c:url>'>&larr;
+					<li class="page-item "><a class="page-link"
+						href='<c:url value="/trang-chu/${screenName }/nextPage"></c:url>'>&larr;
 							Older</a></li>
-					<li class="page-item "><a class="page-link" href='<c:url value="/trang-chu/previousPage"></c:url>'>Newer
+					<li class="page-item "><a class="page-link"
+						href='<c:url value="/trang-chu/${screenName }/previousPage"></c:url>'>Newer
 							&rarr;</a></li>
 				</ul>
 
@@ -204,7 +215,8 @@
 				<div class="card h-100">
 					<div class="card-body">
 						<h2 class="card-title">Anh Nguyen</h2>
-						<p class="card-text">Rất đẹp trai, tài lăng có tố chất lãnh đạo thường xuyên review địa danh </p>
+						<p class="card-text">Rất đẹp trai, tài lăng có tố chất lãnh
+							đạo thường xuyên review địa danh</p>
 					</div>
 					<div class="card-footer">
 						<a href="#" class="btn btn-primary btn-sm">More Info</a>
@@ -242,14 +254,14 @@
 			</div>
 			<!-- /.col-md-4 -->
 			<div class="col-md-12 mb-5">
-			<!-- Pagination -->
+				<!-- Pagination -->
 				<ul class="pagination justify-content-center mb-4">
 					<li class="page-item "><a class="page-link" href='#'>&larr;
-							Older</a></li>
-					<li class="page-item "><a class="page-link" href='#'>Newer
+							Prev</a></li>
+					<li class="page-item "><a class="page-link" href='#'>Next
 							&rarr;</a></li>
 				</ul>
-				</div>
+			</div>
 		</div>
 		<!-- /.row -->
 

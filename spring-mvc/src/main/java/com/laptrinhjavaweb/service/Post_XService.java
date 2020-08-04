@@ -37,4 +37,7 @@ public class Post_XService {
 	public Page<Post_X> findAllByOrderByIdDesc(Pageable pageable){
 		return postRepo.findAllByOrderByIdDesc(pageable);
 	}
+	public Page<Post_X> findByTitleContaining(String title,Pageable pageable) {
+		return postRepo.findByTitleContaining(title,pageable);
+	}
 }
