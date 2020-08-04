@@ -21,7 +21,7 @@
 
 				<!-- Author -->
 				<p class="lead">
-					by <a href="#">Start Bootstrap</a>
+					by <a href="<c:url value='/trang-chu/profile'></c:url>">${sessionScope.username }</a>
 				</p>
 
 				<p class="lead">
