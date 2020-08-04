@@ -5,6 +5,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<style type="text/css">
+#result {
+	position: absolute;
+	width: 80%;
+	max-width: 870px;
+	cursor: pointer;
+	overflow-y: auto;
+	max-height: 400px;
+	box-sizing: border-box;
+	z-index: 1001;
+}
+
+.link-class:hover {
+	background-color: #f1f1f1;
+}
+</style>
 <meta charset="UTF-8">
 <link rel="icon"
 	href="<c:url value='/template/web/vendor/common/icon.png'/>">
@@ -22,9 +39,10 @@
 <link href="<c:url value='/template/web/css/small-business.css'/>"
 	rel="stylesheet" type="text/css">
 </head>
+
 <body>
 	<%@ include file="/common/web/header.jsp"%>
-	<div style ='padding-left:100px; padding-right:50px'>
+	<div style='padding-left: 100px; padding-right: 50px'>
 
 		<div class="row">
 			<!-- Navigation -->
@@ -39,17 +57,23 @@
 					<h5 class="card-header">Search</h5>
 					<div class="card-body">
 						<div class="input-group">
-							<input type="text" class="form-control"
-								placeholder="Search for..."> <span
-								class="input-group-append">
-								<button class="btn btn-secondary" type="button">Go!</button>
-							</span>
+							<form action='<c:url value='/trang-chu/search?${_csrf.parameterName}=${_csrf.token}'></c:url>'
+								method="post">
+								<input type="text" name="search" id="search"
+									class="form-control" /> <span class="input-group-append">
+									<button class="btn btn-secondary" type="submit">Go!</button>
+								</span>
+							</form>
 						</div>
+						<ul class="list-group" id="result"></ul>
+						<br />
 					</div>
 				</div>
 
+
+
 				<!-- Categories Widget -->
-				<div class="card my-4">
+				<!-- <div class="card my-4">
 					<h5 class="card-header">Categories</h5>
 					<div class="card-body">
 						<div class="row">
@@ -69,15 +93,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				<!-- Side Widget -->
-				<div class="card my-4">
-					<h5 class="card-header">Side Widget</h5>
-					<div class="card-body">You can put anything you want inside
-						of these side widgets. They are easy to use, and feature the new
-						Bootstrap 4 card containers!</div>
-				</div>
 
 			</div>
 		</div>
@@ -91,5 +109,70 @@
 	<script
 		src="<c:url value='/template/web/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
 	<script src="<c:url value='/template/web/vendor/common/common.js'/>"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('#result').on('click', 'li', function() {
+				var click_text = $(this).text().split('|');
+				$('#search').val($.trim(click_text[0]));
+				$("#result").html('');
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$('#search')
+									.keyup(
+											function() {
+												$('#result').html('');
+												$
+														.ajax({
+															type : 'GET',
+															data : {
+																serch : $(
+																		'#search')
+																		.val()
+															},
+															contentType : 'application/json; charset=utf-8',
+															url : '${pageContext.request.contextPath }/ajax',
+															success : function(
+																	result) {
+																var products = $
+																		.parseJSON(result);
+																var size = products.length;
+																var s = "";
+																for (var i = 0; i < products.length; i++) {
+																	$('#result')
+																			.append(
+																					'<li class="list-group-item link-class">'
+																							+ products[i]
+																							+ ' | <span class="text-muted">'
+																							+ products[i]
+																							+ '</span></li>');
+																}
+
+															}
+														});
+											});
+						});
+	</script>
+	<!-- <script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							$("select")
+									.change(
+											function() {
+												var selectedVal = $(
+														"#myselect option:selected")
+														.val();
+												alert("Hi, your favorite programming language is "
+														+ selectedVal);
+
+											});
+						});
+	</script> -->
 </body>
 </html>

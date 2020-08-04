@@ -2,6 +2,8 @@ package com.laptrinhjavaweb.controller.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,7 @@ public class UserController {
 
 //hien thị danh sach user
 	@RequestMapping(value = "admin/user")
-	public String showUser(Model model) {
+	public String showUser(Model model,HttpSession session) {
 		List<User> listUser = userSV.findAll();
 		model.addAttribute("page", "user");
 		model.addAttribute("listUser", listUser);

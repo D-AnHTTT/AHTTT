@@ -21,7 +21,7 @@
 			<div class="modal-dialog">
 				<!-- Modal content-->
 				<div class="modal-content">
-					<form action='<c:url value="/trang-chu/addPost"></c:url>'
+					<form action='<c:url value="/trang-chu/addPost?${_csrf.parameterName}=${_csrf.token}"></c:url>'
 						enctype="multipart/form-data" method="post">
 						<div style="height: 0px; overflow: hidden">
 							<input type="file" id="fileInput" name="fileInput"

@@ -11,6 +11,8 @@
 	<div class='container' style='padding-top: 50px; width: 50%'>
 		<form class="form-signin"
 			action='<c:url value="/trang-chu/loginVerify"></c:url>' method='post'>
+			<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
 			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 			<label for="inputEmail" class="sr-only">Email address</label> <input
 				type="text" name='username' id="inputEmail" class="form-control"
