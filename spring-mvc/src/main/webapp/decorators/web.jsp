@@ -56,15 +56,14 @@
 				<div class="card my-4">
 					<h5 class="card-header">Search</h5>
 					<div class="card-body">
+					<form action='<c:url value='/trang-chu/search?${_csrf.parameterName}=${_csrf.token}'></c:url>' method="post">
 						<div class="input-group">
-							<form action='<c:url value='/trang-chu/search?${_csrf.parameterName}=${_csrf.token}'></c:url>'
-								method="post">
-								<input type="text" name="search" id="search"
-									class="form-control" /> <span class="input-group-append">
+								<input type="text" name="search" id="search" class="form-control" /> 
+								<span class="input-group-append">
 									<button class="btn btn-secondary" type="submit">Go!</button>
 								</span>
-							</form>
 						</div>
+						</form>
 						<ul class="list-group" id="result"></ul>
 						<br />
 					</div>
