@@ -9,7 +9,7 @@ import com.laptrinhjavaweb.repository.RateRepository;
 
 @Service
 public class RateService {
-	
+
 	@Autowired
 	private RateRepository RateRP;
 
@@ -25,5 +25,12 @@ public class RateService {
 		return RateRP.findOne(id);
 	}
 
+	public Integer quantity(long id) {
+		return RateRP.quantity(id);
+	}
+
+	public Double avgRate(long id) {
+		return RateRP.avg(id);
+	}
 
 }

@@ -29,5 +29,8 @@ public class CommentService {
 	public void delete(long id){
 		commentRP.delete(id);
 	}
+	public List<Comment> findPost(long id){
+		return commentRP.findPost(id);
+	}
 
 }

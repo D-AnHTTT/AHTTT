@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+</style>
 </head>
 <body>
 	<!-- Page Content -->
@@ -23,6 +25,23 @@
 				<p class="lead">
 					by <a href="<c:url value='/trang-chu/profile'></c:url>">${sessionScope.username }</a>
 				</p>
+				<form action='<c:url value="/trang-chu/saveRate"></c:url>'>
+					<div class="rating-box">
+						<div class="ratings">
+							<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
+							<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
+							<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
+							<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
+							<span class="fa fa-star-o"></span> <span class="fa fa-star-o"></span>
+						</div>
+						Số người: ${quantityRate} Trùng bình ${avgRate} <input
+							type="hidden" name="quantity" id="rating-value"> <input
+							type="hidden" name="username" value="${sessionScope.username }">
+						<input type="hidden" name="postid" value="${postDetail.getId()}">
+
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</form>
 
 				<p class="lead">
 					<span>in category</span> <span class="text-primary">${categoryPostName }</span>
@@ -46,39 +65,6 @@
 
 				<!-- Post Content -->
 				<p>${postDetail.getContent() }</p>
-				<!-- <p class="lead">Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit. Ducimus, vero, obcaecati, aut, error quam
-					sapiente nemo saepe quibusdam sit excepturi nam quia corporis
-					eligendi eos magni recusandae laborum minus inventore?</p>
-
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut,
-					tenetur natus doloremque laborum quos iste ipsum rerum obcaecati
-					impedit odit illo dolorum ab tempora nihil dicta earum fugiat.
-					Temporibus, voluptatibus.</p>
-
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-					Eos, doloribus, dolorem iusto blanditiis unde eius illum
-					consequuntur neque dicta incidunt ullam ea hic porro optio ratione
-					repellat perspiciatis. Enim, iure!</p>
-
-				<blockquote class="blockquote">
-					<p class="mb-0">Lorem ipsum dolor sit amet, consectetur
-						adipiscing elit. Integer posuere erat a ante.</p>
-					<footer class="blockquote-footer">
-						Someone famous in <cite title="Source Title">Source Title</cite>
-					</footer>
-				</blockquote>
-
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-					Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora
-					commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem
-					obcaecati?</p>
-
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-					Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione
-					tempore quidem voluptates cupiditate voluptas illo saepe quaerat
-					numquam recusandae? Qui, necessitatibus, est!</p> -->
-
 				<hr>
 				<!--/.Carousel Wrapper-->
 				<div id="carousel-example-2"
@@ -133,19 +119,7 @@
 								</div>
 							</div>
 						</c:forEach>
-						<!-- <div class="carousel-item">
-							Mask color
-							<div class="view">
-								<img class="d-block w-100"
-									src="https://mdbootstrap.com/img/Photos/Slides/img%20(108).jpg"
-									alt="Third slide">
-								<div class="mask rgba-black-light"></div>
-							</div>
-							<div class="carousel-caption">
-						<h3 class="h3-responsive">This is the third title</h3>
-						<p>Third text</p>
-					</div>
-						</div> -->
+
 					</div>
 					<!--/.Slides-->
 					<!--Controls-->
@@ -165,67 +139,35 @@
 				<div class="card my-4">
 					<h5 class="card-header">Leave a Comment:</h5>
 					<div class="card-body">
-						<form>
+
+						<form action='<c:url value="/trang-chu/saveCommenst"></c:url>'>
 							<div class="form-group">
-								<textarea class="form-control" rows="3"></textarea>
+								<textarea class="form-control" name="comment" rows="3"></textarea>
+								<input type="hidden" name="username"
+									value="${sessionScope.username }"> <input type="hidden"
+									name="postid" value="${postDetail.getId() }">
+
+
 							</div>
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
 					</div>
 				</div>
 
+
 				<!-- Single Comment -->
-				<div class="media mb-4">
-					<img class="d-flex mr-3 rounded-circle"
-						src="http://placehold.it/50x50" alt="">
-					<div class="media-body">
-						<h5 class="mt-0">Commenter Name</h5>
-						Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-						scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-						vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-						nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-					</div>
-				</div>
 
+				<c:forEach var="items" items="${listcomment}">
+					<div class="media mb-4">
+						<img class="d-flex mr-3 rounded-circle"
+							src="http://placehold.it/50x50" alt="">
+						<div class="media-body">
+							<h5 class="mt-0">${items.getUser_name()}</h5>
+							${items.getContent()}
+						</div>
+					</div>
+				</c:forEach>
 				<!-- Comment with nested comments -->
-				<div class="media mb-4">
-					<img class="d-flex mr-3 rounded-circle"
-						src="http://placehold.it/50x50" alt="">
-					<div class="media-body">
-						<h5 class="mt-0">Commenter Name</h5>
-						Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-						scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-						vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-						nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-						<div class="media mt-4">
-							<img class="d-flex mr-3 rounded-circle"
-								src="http://placehold.it/50x50" alt="">
-							<div class="media-body">
-								<h5 class="mt-0">Commenter Name</h5>
-								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-								scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-								vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-								nisi vulputate fringilla. Donec lacinia congue felis in
-								faucibus.
-							</div>
-						</div>
-
-						<div class="media mt-4">
-							<img class="d-flex mr-3 rounded-circle"
-								src="http://placehold.it/50x50" alt="">
-							<div class="media-body">
-								<h5 class="mt-0">Commenter Name</h5>
-								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-								scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-								vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-								nisi vulputate fringilla. Donec lacinia congue felis in
-								faucibus.
-							</div>
-						</div>
-
-					</div>
-				</div>
 
 			</div>
 
@@ -236,5 +178,39 @@
 		<!-- /.container -->
 
 	</div>
+	<script type="text/javascript">
+		const stars = document.querySelector(".ratings").children;
+		const ratingValue = document.querySelector("#rating-value");
+		let index;
+
+		for (let i = 0; i < stars.length; i++) {
+			stars[i].addEventListener("mouseover", function() {
+				// console.log(i)
+				for (let j = 0; j < stars.length; j++) {
+					stars[j].classList.remove("fa-star");
+					stars[j].classList.add("fa-star-o");
+				}
+				for (let j = 0; j <= i; j++) {
+					stars[j].classList.remove("fa-star-o");
+					stars[j].classList.add("fa-star");
+				}
+			})
+			stars[i].addEventListener("click", function() {
+				ratingValue.value = i + 1;
+				index = i;
+			})
+			stars[i].addEventListener("mouseout", function() {
+
+				for (let j = 0; j < stars.length; j++) {
+					stars[j].classList.remove("fa-star");
+					stars[j].classList.add("fa-star-o");
+				}
+				for (let j = 0; j <= index; j++) {
+					stars[j].classList.remove("fa-star-o");
+					stars[j].classList.add("fa-star");
+				}
+			})
+		}
+	</script>
 </body>
 </html>

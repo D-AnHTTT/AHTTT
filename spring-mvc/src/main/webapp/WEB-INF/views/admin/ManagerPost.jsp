@@ -20,6 +20,8 @@
 					<tr>
 
 						<th>Id</th>
+						<th>Address</th>
+						<th>Category</th>
 						<th>Title</th>
 						<th>Username</th>
 						<th>Content</th>
@@ -31,10 +33,14 @@
 					<c:forEach var="item" items="${listpost}">
 						<tr>
 							<td>${item.getId()}</td>
+							<td>${item.getAddress()}</td>
+							<td>${item.getCategory_id()}</td>
 							<td>${item.getTitle()}</td>
 							<td>${item.getUsername()}</td>
 							<td>${item.getContent()}</td>
 							<td>${item.getTime_post()}</td>
+
+
 							<td><c:url var="deleteComment" value="/admin/deletePost">
 									<c:param name="id" value="${item.getId()}" />
 								</c:url> <a href="${deleteComment}"><button

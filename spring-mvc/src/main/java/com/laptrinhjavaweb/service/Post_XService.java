@@ -24,20 +24,31 @@ public class Post_XService {
 		return postRepo.findAll(pageable);
 	}
 
+	public List<Post_X> findAllPostX() {
+		return postRepo.findAll();
+	}
+
 	public Post_X findById(long id) {
 		return postRepo.findById(id);
+	}
+
+	public void delete(long id) {
+		postRepo.delete(id);
 	}
 
 	public List<Post_X> findPostByLimit(int lmt) {
 		return postRepo.findPostByLimit(lmt);
 	}
+
 	public List<Post_X> findPostByTitle(String title) {
 		return postRepo.findPostByTitle(title);
 	}
-	public Page<Post_X> findAllByOrderByIdDesc(Pageable pageable){
+
+	public Page<Post_X> findAllByOrderByIdDesc(Pageable pageable) {
 		return postRepo.findAllByOrderByIdDesc(pageable);
 	}
-	public Page<Post_X> findByTitleContaining(String title,Pageable pageable) {
-		return postRepo.findByTitleContaining(title,pageable);
+
+	public Page<Post_X> findByTitleContaining(String title, Pageable pageable) {
+		return postRepo.findByTitleContaining(title, pageable);
 	}
 }

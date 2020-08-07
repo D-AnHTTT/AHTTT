@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
+<%@ include file="/common/taglib.jsp"%>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
@@ -31,8 +31,6 @@
 							<td>${item.getPost_id()}</td>
 							<td>${item.getTime_rate()}</td>
 							<td>${item.getQuantity()}</td>
-
-
 						</tr>
 					</c:forEach>
 				</tbody>

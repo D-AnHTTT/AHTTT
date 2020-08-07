@@ -40,5 +40,8 @@ public class UserService {
 	public void delete(long id) {
 		UserRP.delete(id);
 	}
+	public User findUserName(String username) {
+		return UserRP.findByUsername(username);
+	}
 
 }

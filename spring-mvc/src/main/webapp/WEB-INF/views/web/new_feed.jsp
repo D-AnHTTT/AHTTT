@@ -102,36 +102,7 @@
 
 			</div>
 		</div>
-		<%-- <div class="row">
-
-      <!-- Blog Entries Column -->
-      <div class="col-md-12">
-		<c:if test="${not empty listPost}">
-			<c:forEach var='item' items='${listPost }'>
-				<div class="row align-items-center my-5">
-					<div class="col-lg-7">
-						<img src="<c:url value='/file/${item.getImgThumbnail() }'/>"
-							class="img-thumbnail" alt="Hinh anh thumbnail cua post"
-							width="900" height="400">
-						<!-- <img class="img-fluid rounded mb-4 mb-lg-0"
-					src="http://placehold.it/900x400" alt=""> -->
-					</div>
-					<!-- /.col-lg-8 -->
-					<div class="col-lg-5">
-						<h1 class="font-weight-light">${item.getTitle()}</h1>
-						<p>${item.getShortDecription() }</p>
-						<c:url var='postUrl' value='/trang-chu/showPostDetail'>
-						<c:param name="id" value='${item.getId() }'/>
-						</c:url>
-						<a class="btn btn-primary" href="${ postUrl}">Chi tiết</a>
-					</div>
-					<!-- /.col-md-4 -->
-				</div>
-			</c:forEach>
-		</c:if>
-		<!-- Page Content -->
-		</div>
-		</div> --%>
+		
 
 		<div class="row" style='padding-top: 20px'>
 

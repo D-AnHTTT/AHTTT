@@ -14,7 +14,6 @@ public class Post_X {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String title;
-	@Type(type="text")
 	private String content;
 	private String shortDecription;
 	private String time_post;

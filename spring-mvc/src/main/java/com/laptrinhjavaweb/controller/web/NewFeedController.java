@@ -1,6 +1,5 @@
 package com.laptrinhjavaweb.controller.web;
 
-
 import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
@@ -20,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.laptrinhjavaweb.entity.Category;
+import com.laptrinhjavaweb.entity.Comment;
 import com.laptrinhjavaweb.entity.Post_X;
 import com.laptrinhjavaweb.modelAnh.PostModel;
 import com.laptrinhjavaweb.service.CategoryService;
+import com.laptrinhjavaweb.service.CommentService;
 import com.laptrinhjavaweb.service.Post_XService;
 import com.laptrinhjavaweb.service.UserService;
 
@@ -34,7 +35,10 @@ public class NewFeedController {
 	Post_XService postService;
 	@Autowired
 	UserService userService;
-	Pageable pageable = new PageRequest(0,2);
+	@Autowired
+	CommentService commentSV;
+	Pageable pageable = new PageRequest(0, 2);
+
 	@RequestMapping(value = "/trang-chu/newFeed", method = RequestMethod.GET)
 	public String showNewFeed(Model model, HttpSession session) {
 		List<Category> listCategory = categoryService.findAll();
@@ -50,64 +54,74 @@ public class NewFeedController {
 		}
 		return "web/new_feed";
 	}
+
 	public String replaceContentWithBr(String str) {
 		StringBuffer text = new StringBuffer(str);
 		int loc = (new String(text)).indexOf('\n');
-	    while(loc > 0){
-	        text.replace(loc, loc+1, "<BR>");
-	        loc = (new String(text)).indexOf('\n');
-	   }
+		while (loc > 0) {
+			text.replace(loc, loc + 1, "<BR>");
+			loc = (new String(text)).indexOf('\n');
+		}
 		return text.toString();
 	}
+
 	@RequestMapping(value = "/trang-chu/addPost", method = RequestMethod.POST)
-	public String addNewFeed(@RequestParam("title")String title,@RequestParam("shortDecription")String shortDecription,@RequestParam("content")String content,
-							 @RequestParam("address")String address,@RequestParam("city")String city,
-							 @RequestParam("state")String state,@RequestParam("fileThumbnail")MultipartFile fileThumbnail,
-							 @RequestParam("reviewType")String reviewType,@RequestParam(value = "fileInput", required = false)MultipartFile[] fileInput) {
+	public String addNewFeed(@RequestParam("title") String title,
+			@RequestParam("shortDecription") String shortDecription, @RequestParam("content") String content,
+			@RequestParam("address") String address, @RequestParam("city") String city,
+			@RequestParam("state") String state, @RequestParam("fileThumbnail") MultipartFile fileThumbnail,
+			@RequestParam("reviewType") String reviewType,
+			@RequestParam(value = "fileInput", required = false) MultipartFile[] fileInput) {
+		Post_X post = new Post_X();
 		try {
 			String day = "" + LocalDate.now();
 			String fileThumbnailUrl = fileThumbnail.getOriginalFilename();
-			File saveFileThumbnail = new File("/Users/anhnguyen/desktop/Tmp/" + fileThumbnailUrl);
+			File saveFileThumbnail = new File("/Users/Quang Thinh/Desktop/Tmp/" + fileThumbnailUrl);
 			fileThumbnail.transferTo(saveFileThumbnail);
 			StringBuffer sb = new StringBuffer();
-			for(int i=0;i<fileInput.length;i++) {
+			for (int i = 0; i < fileInput.length; i++) {
 				String fileUrl = fileInput[i].getOriginalFilename();
-				if(!fileUrl.equals("")) {
-					File saveFile = new File("/Users/anhnguyen/desktop/Tmp/" + fileUrl);
+				if (!fileUrl.equals("")) {
+					File saveFile = new File("/Users/Quang Thinh/Desktop/Tmp/" + fileUrl);
 					fileInput[i].transferTo(saveFile);
 					sb.append(fileUrl);
-					if(i!=fileInput.length-1)
+					if (i != fileInput.length - 1)
 						sb.append("&&");
 				}
 			}
-			Post_X post = new Post_X();
-			post.setTitle(title);
-			post.setContent(replaceContentWithBr(content));
-			post.setAddress(address+", "+city+", "+state);
 			post.setTime_post(day);
-			post.setShortDecription(shortDecription);
-			post.setCategory_id(categoryService.findByName(reviewType).getId());
 			post.setImgThumbnail(fileThumbnailUrl);
 			post.setImgPost(sb.toString());
-			postService.save(post);
 		} catch (Exception e) {
 
 		}
+
+		post.setTitle(title);
+		post.setContent(replaceContentWithBr(content));
+		post.setAddress(address + ", " + city + ", " + state);
+
+		post.setShortDecription(shortDecription);
+		post.setCategory_id(categoryService.findByName(reviewType).getId());
+		postService.save(post);
 		return "redirect:/trang-chu/newFeed";
 	}
+
 	@RequestMapping(value = "/trang-chu/showPostDetail", method = RequestMethod.GET)
-	public String showPostDetail(@Param("id")long id, Model model) {
+	public String showPostDetail(@Param("id") long id, Model model) {
 		Post_X post = postService.findById(id);
 		String categoryName = categoryService.findId(post.getCategory_id()).getName();
 		PostModel postModel = new PostModel();
 		postModel.setPost(post);
 		postModel.setCategoryName(categoryName);
 		postModel.setListImgPost();
+		List<Comment> listcomment = commentSV.findPost(id);
 		model.addAttribute("postDetail", postModel.getPost());
 		model.addAttribute("categoryPostName", postModel.getCategoryName());
 		model.addAttribute("listImgPost", postModel.getListImgPost());
+		model.addAttribute("listcomment", listcomment);
 		return "web/post_detail";
 	}
+
 	@RequestMapping(value = "/trang-chu/newfeed/nextPage", method = RequestMethod.GET)
 	public String nextPage(Model model) {
 		pageable = pageable.next();
@@ -116,6 +130,7 @@ public class NewFeedController {
 		model.addAttribute("listPost", listPost.getContent());
 		return "web/new_feed";
 	}
+
 	@RequestMapping(value = "/trang-chu/newfeed/previousPage", method = RequestMethod.GET)
 	public String previousPage(Model model) {
 		pageable = pageable.previousOrFirst();
@@ -124,4 +139,6 @@ public class NewFeedController {
 		model.addAttribute("listPost", listPost.getContent());
 		return "web/new_feed";
 	}
+
+	
 }

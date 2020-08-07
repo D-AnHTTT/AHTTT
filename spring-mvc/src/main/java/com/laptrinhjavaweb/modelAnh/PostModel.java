@@ -3,21 +3,24 @@ package com.laptrinhjavaweb.modelAnh;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.laptrinhjavaweb.entity.Comment;
 import com.laptrinhjavaweb.entity.Post_X;
 
 public class PostModel {
 	Post_X post;
 	String categoryName;
 	List<String> listImgPost;
+	Comment comment;
 
 	public PostModel() {
 		this.listImgPost = new ArrayList<String>();
 	}
 
-	public PostModel(Post_X post, String categoryName) {
+	public PostModel(Post_X post, String categoryName, Comment comment) {
 		super();
 		this.post = post;
 		this.categoryName = categoryName;
+		this.comment = comment;
 	}
 
 	public List<String> getListImgPost() {
@@ -38,6 +41,14 @@ public class PostModel {
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	public Comment getComment() {
+		return comment;
+	}
+
+	public void setComment(Comment comment) {
+		this.comment = comment;
 	}
 
 	public void setListImgPost() {

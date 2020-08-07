@@ -7,6 +7,24 @@
 <head>
 
 <style type="text/css">
+
+.rating-box h1 {
+	margin: 0 0 30px;
+	font-size: 40px;
+}
+
+.rating-box .ratings .fa {
+	font-size: 25px;
+	color: #FF9800;
+	float: left;
+	cursor: pointer;
+}
+
+.rating-box input {
+	margin-top: 20px;
+	font-size: 30px;
+	padding: 6px 12px;
+}
 #result {
 	position: absolute;
 	width: 80%;
@@ -28,6 +46,8 @@
 <title>Trang chủ</title>
 
 <!-- Bootstrap core CSS -->
+<link rel="stylesheet" type="text/css"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link
 	href="<c:url value='/template/web/vendor/bootstrap/css/bootstrap.min.css'/>"
 	rel="stylesheet" type="text/css">
@@ -123,21 +143,6 @@
 			});
 		});
 	</script>
-	<!-- <script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$("select")
-									.change(
-											function() {
-												var selectedVal = $(
-														"#myselect option:selected")
-														.val();
-												alert("Hi, your favorite programming language is "
-														+ selectedVal);
-
-											});
-						});
-	</script> -->
+	
 </body>
 </html>
