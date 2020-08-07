@@ -19,10 +19,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.laptrinhjavaweb.repository"})
+@EnableJpaRepositories(basePackages = { "com.laptrinhjavaweb.repository" })
 @EnableTransactionManagement
 public class JPAConfig {
-	
+
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -33,19 +33,19 @@ public class JPAConfig {
 		em.setJpaProperties(additionalProperties());
 		return em;
 	}
-	
+
 	@Bean
 	JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactory);
 		return transactionManager;
 	}
-	
+
 	@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
-	
+
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -55,18 +55,18 @@ public class JPAConfig {
 		dataSource.setPassword("");
 		return dataSource;
 	}
-	
+
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver multipartResolver() {
-	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-	    multipartResolver.setMaxUploadSize(50000000);
-	    return multipartResolver;
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setMaxUploadSize(50000000);
+		return multipartResolver;
 	}
-	
+
 	Properties additionalProperties() {
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "create");
-//		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		//properties.setProperty("hibernate.hbm2ddl.auto", "create");
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
 //		properties.setProperty("hibernate.hbm2ddl.auto", "none");
 		return properties;
 	}
