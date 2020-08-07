@@ -7,7 +7,25 @@
 <head>
 
 <style type="text/css">
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
 
+#myBtn:hover {
+  background-color: #555;
+}
 .rating-box h1 {
 	margin: 0 0 30px;
 	font-size: 40px;
@@ -62,6 +80,7 @@
 
 <body>
 	<%@ include file="/common/web/header.jsp"%>
+	<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 	<div style='padding-left: 100px; padding-right: 50px'>
 		<div class="row">
 			<!-- Navigation -->
@@ -82,7 +101,7 @@
 								<input
 									onkeyup="return searchPost('${pageContext.request.contextPath}')"
 									onfocus="return searchOnFocus('${pageContext.request.contextPath}')"
-									onblur="return searchOutFocus('${pageContext.request.contextPath}')"
+									<%-- onblur="return searchOutFocus('${pageContext.request.contextPath}')" --%>
 									type="text" name="search" id="search" class="form-control" />
 								<span class="input-group-append">
 									<button class="btn btn-secondary" type="submit">Go!</button>
@@ -135,6 +154,7 @@
 	<script src="<c:url value='/template/web/vendor/common/common.js'/>"></script>
 
 	<script>
+	
 		$(document).ready(function() {
 			$('#result').on('click', 'li', function() {
 				var click_text = $(this).text().split('|');

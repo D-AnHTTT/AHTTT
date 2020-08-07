@@ -25,9 +25,9 @@
 						<c:when test='${sessionScope.username == ""||sessionScope.username==null  }'>
 							<a class="dropdown-item" href="#">Info</a> 
 						</c:when>
-						<c:when test='${sessionScope.username != "" }'>
-							<a class="dropdown-item" href="#">${sessionScope.username }</a> 
-						</c:when>
+						<c:when test='${sessionScope.username != ""||sessionScope.username!=null }'>
+							<a class="dropdown-item" href="<c:url value='/trang-chu/profile'></c:url>">${sessionScope.username }</a>
+							</c:when>
 					</c:choose>
 						<a class="dropdown-item" href="#">Notification</a> 
 						<a class="dropdown-item" href="#">Log in</a>

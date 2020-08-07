@@ -1,5 +1,8 @@
 package com.laptrinhjavaweb.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -53,7 +56,14 @@ public class Post_X {
 		this.shortDecription = shortDecription;
 	}
 
-
+	public List<String> getListHashTag(){
+		List<String> listHashTag = new ArrayList<String>();
+		String[] strarr = this.shortDecription.split(" ");
+		for (String s :strarr) {
+			listHashTag.add(s);
+		}
+		return listHashTag;
+	}
 	public String getImgThumbnail() {
 		return imgThumbnail;
 	}

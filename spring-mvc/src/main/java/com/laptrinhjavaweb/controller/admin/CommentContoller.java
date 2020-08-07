@@ -53,8 +53,8 @@ public class CommentContoller {
 	public String showPostDetail(@PathVariable("id") long id, Model model) {
 		Post_X post = postService.findById(id);
 		List<Comment> listcomment = commentSV.findPost(id);
-		int quantityRate = rateSV.quantity(5);
-		double avgRate = rateSV.avgRate(5);
+		int quantityRate = rateSV.quantity(id);
+		double avgRate = rateSV.avgRate(id);
 		String categoryName = categoryService.findId(post.getCategory_id()).getName();
 		PostModel postModel = new PostModel();
 		postModel.setPost(post);

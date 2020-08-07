@@ -28,7 +28,6 @@ public class SearchController {
 	Post_XService post_xService;
 	Pageable pageable = new PageRequest(0, 2);
 	String search = "";
-
 	@RequestMapping(value = "ajax")
 	public void search(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Gson gson = new Gson();
@@ -58,27 +57,30 @@ public class SearchController {
 	}
 
 	@RequestMapping(value = "/trang-chu/search")
-	public String doSearch(@RequestParam("search") String search, Model model) {
-		Page<Post_X> listPost = post_xService.findByTitleContaining(search, pageable);
+	public String doSearch(@RequestParam("search") String search,Model model) {
+		try {
+			search = search.replace('#', ' ').trim();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		Page<Post_X> listPost = post_xService.findByTitleContaining(search,search,pageable);
 		this.search = search;
 		model.addAttribute("listPost", listPost.getContent());
 		model.addAttribute("screenName", "searchPost");
 		return "web/new_feed";
 	}
-
 	@RequestMapping(value = "/trang-chu/searchPost/nextPage", method = RequestMethod.GET)
 	public String nextPage(Model model) {
 		pageable = pageable.next();
-		Page<Post_X> listPost = post_xService.findByTitleContaining(search, pageable);
+		Page<Post_X> listPost = post_xService.findByTitleContaining(search,search,pageable);
 		model.addAttribute("listPost", listPost.getContent());
 		model.addAttribute("screenName", "searchPost");
 		return "web/new_feed";
 	}
-
 	@RequestMapping(value = "/trang-chu/searchPost/previousPage", method = RequestMethod.GET)
 	public String previousPage(Model model) {
 		pageable = pageable.previousOrFirst();
-		Page<Post_X> listPost = post_xService.findByTitleContaining(search, pageable);
+		Page<Post_X> listPost = post_xService.findByTitleContaining(search,search,pageable);
 		model.addAttribute("listPost", listPost.getContent());
 		model.addAttribute("screenName", "searchPost");
 		return "web/new_feed";

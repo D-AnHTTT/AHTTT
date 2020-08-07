@@ -1,3 +1,25 @@
+var mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {
+	scrollFunction()
+};
+function scrollFunction() {
+	if (document.body.scrollTop > 140
+			|| document.documentElement.scrollTop > 140) {
+		mybutton.style.display = "block";
+	} else {
+		mybutton.style.display = "none";
+	}
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+	window.scrollTo({
+		top : 0,
+		behavior : 'smooth'
+	});
+}
 function searchPost(contextPath) {
 	$('#result').html('');
 	$.ajax({
@@ -6,7 +28,7 @@ function searchPost(contextPath) {
 			serch : $('#search').val()
 		},
 		contentType : 'application/json; charset=utf-8',
-		url : contextPath+'/ajax',
+		url : contextPath + '/ajax',
 		success : function(result) {
 			var products = $.parseJSON(result);
 			var size = products.length;
@@ -21,10 +43,10 @@ function searchPost(contextPath) {
 		}
 	});
 }
-function searchOnFocus(contextPath){
+function searchOnFocus(contextPath) {
 	searchPost(contextPath);
 }
-function searchOutFocus(){
+function searchOutFocus() {
 	$('#result').html('');
 }
 function chooseFile(fileInput) {

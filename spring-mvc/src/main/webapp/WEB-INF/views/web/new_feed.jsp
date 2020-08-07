@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,15 +14,16 @@
 		<c:choose>
 			<c:when test='${screenName=="newfeed" }'>
 				<h1 class='display-3'>New Feed</h1>
+				<button onclick='checkLogin()' type="button"
+			class="btn btn-primary btn-lg" data-toggle="modal"
+			data-target="#myModal">Tạo bài viết</button>
 			</c:when>
 			<c:when test='${screenName=="searchPost" }'>
 				<h1 class='display-3'>Search Page</h1>
 			</c:when>
 		</c:choose>
 		<!-- Trigger the modal with a button -->
-		<button onclick='checkLogin()' type="button"
-			class="btn btn-primary btn-lg" data-toggle="modal"
-			data-target="#myModal">Tạo bài viết</button>
+		
 
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" role="dialog">
@@ -121,7 +123,23 @@
 								width=100% height=30%>
 							<div class="card-body">
 								<h2 class="card-title">${item.getTitle()}</h2>
-								<p class="card-text">${item.getShortDecription() }</p>
+								<p class="card-text"><%-- <a href="">${item.getShortDecription() }</a> --%>
+								<c:set var="listHashTag" value="${item.getListHashTag() }"/>
+								<c:forEach var="itemListHashTag" items="${listHashTag }">
+									<c:choose>
+										<c:when test="${fn:contains(itemListHashTag, '#')}">
+											<c:url var='searchHashTagUrl' value='/trang-chu/search'>
+												<c:param name="search" value='${itemListHashTag }' />
+											</c:url>
+											<a href='${searchHashTagUrl }'>${itemListHashTag }</a>
+										</c:when>
+										<c:when test="${not fn:contains(itemListHashTag, '#')}">
+											${itemListHashTag }
+										</c:when>
+									</c:choose>
+								</c:forEach>
+								
+								</p>
 								<c:url var='postUrl' value='/trang-chu/showPostDetail'>
 									<c:param name="id" value='${item.getId() }' />
 								</c:url>
